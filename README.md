@@ -6,8 +6,10 @@ As of today the repo provides code for the following:
 * IOU calculation
 * Non-Maximum Suppression
 
-This code is provided for understanding the computations happening behind these metrics and is NOT the most efficient way to implement them.
-For efficiant implementations, I would urge you to look at object detection libraries like mmdetection's implementation.
+This code is an attempt to provide the implementations of these metrics in the simplest manner (for understanding the computations happening better).
+
+It is NOT the most efficient way to implement them.
+For efficient implementations, I would urge you to look at object detection libraries like mmdetection's implementation.
 
 ## Mean Average Precision, IOU and NMS Tutorial Video
 <a href="https://www.youtube.com/watch?v=duBGmrxNHS8">
