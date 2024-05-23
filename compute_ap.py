@@ -188,6 +188,9 @@ def evaluate_map():
     r"""
     Method to show how to use compute_map method
     """
+    # Each ith item in these lists will be a dictionary
+    # containing detections/gt_boxes info
+    # for the ith image
     gts = []
     preds = []
     
@@ -209,9 +212,12 @@ def evaluate_map():
             'boxes': [],  # (N, 4) tensor containing box tensors
             'labels': []  # (N,) tensor label tensors
         }
+        
+        # Compute_map method expects each images detection and gt instance to
+        # be a dict
         pred_boxes = {}
         gt_boxes = {}
-        # compute_map expects list to be present for ALL labels
+        # compute_map expects the dictionary to have keys to be present for ALL labels
         for label_name in labels:
             pred_boxes[label_name] = []
             gt_boxes[label_name] = []
@@ -223,14 +229,17 @@ def evaluate_map():
             score = scores[idx].detach().cpu().item()
             # Get label_name corresponding to this label
             label_name = ''
+            # Update pred_boxes dict by appending this detection to the label_name list
             pred_boxes[label_name].append([x1, y1, x2, y2, score])
         for idx, box in enumerate(target['boxes']):
             x1, y1, x2, y2 = box.detach().cpu().numpy()
             label = target['labels'][idx].detach().cpu().item()
             # Get label_name corresponding to this label
             label_name = ''
+            # Update gt_boxes dict by appending this gt_box to the label_name list
             gt_boxes[label_name].append([x1, y1, x2, y2])
         
+        # Append this instance to list of all image instances
         gts.append(gt_boxes)
         preds.append(pred_boxes)
     
